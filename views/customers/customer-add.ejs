@@ -1,0 +1,196 @@
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Add New Customer</h3>
+  </div>
+  <div class="card-body">
+    <form id="customerForm" action="/customers" method="POST">
+      <div class="card">
+        <div class="card-header">
+          <h3>Personal Details</h3>
+        </div>
+        <div class="card-body">
+          <div class="form-row">
+            <!-- Name -->
+            <div class="form-group col-md-4">
+              <label for="name">Name<span style="color: red">*</span></label>
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                id="name"
+                required
+              />
+              <span id="name-error" class="text-danger"></span>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group col-md-4">
+              <label for="email">Email <span style="color: red">*</span></label>
+              <input
+                type="email"
+                class="form-control"
+                name="email"
+                id="email"
+                required
+              />
+              <span id="email-error" class="text-danger"></span>
+            </div>
+
+            <!-- Phone -->
+            <div class="form-group col-md-4">
+              <label for="phone">Phone<span style="color: red">*</span></label>
+              <input
+                type="text"
+                class="form-control"
+                name="phone"
+                id="phone"
+                required
+              />
+              <span id="phone-error" class="text-danger"></span>
+            </div>
+
+            <!-- Address -->
+            <div class="form-group col-md-4">
+              <label for="address"
+                >Address<span style="color: red">*</span></label
+              >
+              <input
+                class="form-control"
+                name="address"
+                id="address"
+                required
+              />
+              <span id="address-error" class="text-danger"></span>
+            </div>
+
+            <!-- Pincode -->
+            <div class="form-group col-md-4">
+              <label for="pincode"
+                >Pincode<span style="color: red">*</span></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="pincode"
+                id="pincode"
+                required
+              />
+              <span id="pincode-error" class="text-danger"></span>
+            </div>
+
+            <!-- Location -->
+            <div class="form-group col-md-4">
+              <label for="location"
+                >Location<span style="color: red">*</span></label
+              >
+              <input
+                class="form-control"
+                name="location"
+                id="location"
+                required
+              />
+              <span id="location-error" class="text-danger"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <button type="submit" class="btn btn-lg btn-primary">
+          Add Customer
+        </button>
+        <a href="/customers" class="btn btn-default btn-lg float-right"
+          >Cancel</a
+        >
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document
+      .getElementById("customerForm")
+      .addEventListener("submit", function (event) {
+        let isValid = true;
+
+        // Get input values
+        const name = document.getElementById("name");
+        const email = document.getElementById("email");
+        const phone = document.getElementById("phone");
+        const address = document.getElementById("address");
+        const pincode = document.getElementById("pincode");
+        const location = document.getElementById("location");
+
+        // Name validation (Must be a non-empty string)
+        if (!/^[a-zA-Z\s]+$/.test(name.value.trim())) {
+          isValid = false;
+          name.classList.add("is-invalid");
+          document.getElementById("name-error").textContent =
+            "Name must be a valid string.";
+        } else {
+          name.classList.remove("is-invalid");
+          document.getElementById("name-error").textContent = "";
+        }
+
+        // Email validation (Valid email format)
+        if (!/^\S+@\S+\.\S+$/.test(email.value.trim())) {
+          isValid = false;
+          email.classList.add("is-invalid");
+          document.getElementById("email-error").textContent =
+            "Enter a valid email address.";
+        } else {
+          email.classList.remove("is-invalid");
+          document.getElementById("email-error").textContent = "";
+        }
+
+        // Phone validation (Must be exactly 10 digits)
+        if (!/^\d{10}$/.test(phone.value.trim())) {
+          isValid = false;
+          phone.classList.add("is-invalid");
+          document.getElementById("phone-error").textContent =
+            "Phone number must be 10 digits.";
+        } else {
+          phone.classList.remove("is-invalid");
+          document.getElementById("phone-error").textContent = "";
+        }
+
+        // Address validation (Non-empty string)
+        if (!address.value.trim()) {
+          isValid = false;
+          address.classList.add("is-invalid");
+          document.getElementById("address-error").textContent =
+            "Address cannot be empty.";
+        } else {
+          address.classList.remove("is-invalid");
+          document.getElementById("address-error").textContent = "";
+        }
+
+        // Pincode validation (Numeric only)
+        if (!/^\d+$/.test(pincode.value.trim())) {
+          isValid = false;
+          pincode.classList.add("is-invalid");
+          document.getElementById("pincode-error").textContent =
+            "Pincode must be a number.";
+        } else {
+          pincode.classList.remove("is-invalid");
+          document.getElementById("pincode-error").textContent = "";
+        }
+
+        // Location validation (Must be a non-empty string)
+        if (!/^[a-zA-Z\s]+$/.test(location.value.trim())) {
+          isValid = false;
+          location.classList.add("is-invalid");
+          document.getElementById("location-error").textContent =
+            "Location must be a valid string.";
+        } else {
+          location.classList.remove("is-invalid");
+          document.getElementById("location-error").textContent = "";
+        }
+
+        if (!isValid) {
+          event.preventDefault(); // Stop form submission if validation fails
+        }
+      });
+  });
+</script>

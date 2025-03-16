@@ -1,0 +1,191 @@
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Add Product</h3>
+  </div>
+  <div class="card-body">
+    <form
+      id="productForm"
+      action="/products"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <div class="card">
+        <div class="card-header">
+          <h3>Product Details</h3>
+        </div>
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="name"
+                >Product Name<span style="color: red">*</span></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                id="name"
+                required
+              />
+              <span id="name-error" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="uom">UOM:</label>
+              <select class="form-control" id="uom" name="uom" required>
+                <option value="">-- Select UOM --</option>
+                <option value="1 litre">1 Litre</option>
+                <option value="0.5 litre">0.5 Litre</option>
+                <option value="1 kg">1 Kg</option>
+                <option value="0.5 kg">0.5 Kg</option>
+              </select>
+              <span id="uom-error" class="error-text"></span>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="description"
+                >Description<span style="color: red">*</span></label
+              >
+              <textarea
+                class="form-control"
+                name="description"
+                id="description"
+                required
+              ></textarea>
+              <span id="description-error" class="text-danger"></span>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="price">Price<span style="color: red">*</span></label>
+              <input
+                type="number"
+                class="form-control"
+                name="price"
+                id="price"
+                required
+              />
+              <span id="price-error" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="quantity"
+                >Quantity<span style="color: red">*</span></label
+              >
+              <input
+                type="number"
+                class="form-control"
+                name="quantity"
+                id="quantity"
+                required
+              />
+              <span id="quantity-error" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="image">Product Image</label>
+              <input
+                type="file"
+                class="form-control"
+                name="image"
+                id="image"
+                required
+              />
+              <span id="image-error" class="error-text"></span>
+            </div>
+            <input type="hidden" name="category" value="Dairy" />
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button type="submit" class="btn btn-lg btn-primary">
+          Add Product
+        </button>
+        <a href="/products" class="btn btn-default btn-lg float-right"
+          >Cancel</a
+        >
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document
+      .getElementById("productForm")
+      .addEventListener("submit", function (event) {
+        let isValid = true;
+
+        const name = document.getElementById("name");
+        const price = document.getElementById("price");
+        const description = document.getElementById("description");
+        const uom = document.getElementById("uom");
+        const quantity = document.getElementById("quantity");
+        const image = document.getElementById("image");
+
+        // Name validation
+        if (!name.value.trim()) {
+          isValid = false;
+          name.classList.add("is-invalid");
+          document.getElementById("name-error").textContent =
+            "Product name is required.";
+        } else {
+          name.classList.remove("is-invalid");
+          document.getElementById("name-error").textContent = "";
+        }
+
+        // Price validation
+        if (price.value <= 0 || price.value === "") {
+          isValid = false;
+          price.classList.add("is-invalid");
+          document.getElementById("price-error").textContent =
+            "Price must be greater than zero.";
+        } else {
+          price.classList.remove("is-invalid");
+          document.getElementById("price-error").textContent = "";
+        }
+
+        // Description validation
+        if (!description.value.trim()) {
+          isValid = false;
+          description.classList.add("is-invalid");
+          document.getElementById("description-error").textContent =
+            "Description is required.";
+        } else {
+          description.classList.remove("is-invalid");
+          document.getElementById("description-error").textContent = "";
+        }
+
+        // uom validation
+        if (uom.value === "") {
+          isValid = false;
+          uom.classList.add("is-invalid");
+          document.getElementById("uom-error").textContent =
+            "Please select an uom.";
+        } else {
+          uom.classList.remove("is-invalid");
+          document.getElementById("uom-error").textContent = "";
+        }
+
+        // Quantity validation
+        if (quantity.value <= 0 || quantity.value === "") {
+          isValid = false;
+          quantity.classList.add("is-invalid");
+          document.getElementById("quantity-error").textContent =
+            "Quantity must be greater than zero.";
+        } else {
+          quantity.classList.remove("is-invalid");
+          document.getElementById("quantity-error").textContent = "";
+        }
+
+        // Image validation (file input)
+        if (image.files.length === 0) {
+          isValid = false;
+          image.classList.add("is-invalid");
+          document.getElementById("image-error").textContent =
+            "Image is required.";
+        } else {
+          image.classList.remove("is-invalid");
+          document.getElementById("image-error").textContent = "";
+        }
+
+        if (!isValid) {
+          event.preventDefault(); // Prevent form submission if validation fails
+        }
+      });
+  });
+</script>

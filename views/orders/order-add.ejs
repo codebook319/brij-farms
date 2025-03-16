@@ -1,0 +1,200 @@
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Add New Order</h3>
+  </div>
+  <div class="card-body">
+    <form id="orderForm" action="/orders" method="post">
+      <!-- Order Details Card -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Order Details</h3>
+        </div>
+        <div class="card-body">
+          <div class="form-row">
+            <!-- Customer Selection -->
+            <div class="form-group col-md-4">
+              <label for="customer_id"
+                >Customer<span style="color: red">*</span></label
+              >
+              <select
+                class="form-control"
+                id="customer_id"
+                name="customer_id"
+                required
+              >
+                <option value="">-- Select Customer --</option>
+                <% customers.forEach(customer => { %>
+                <option value="<%= customer.id %>"><%= customer.name %></option>
+                <% }); %>
+              </select>
+              <span id="customer-error" class="text-danger"></span>
+            </div>
+
+            <!-- Order Date Selection -->
+            <div class="form-group col-md-4">
+              <label for="order_date"
+                >Order Date<span style="color: red">*</span></label
+              >
+              <input
+                type="date"
+                class="form-control"
+                id="order_date"
+                name="order_date"
+                required
+              />
+              <span id="date-error" class="text-danger"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products Section -->
+      <div class="card mt-3">
+        <div class="card-header">
+          <h3>Products</h3>
+        </div>
+        <div class="card-body">
+          <div id="products-container">
+            <div class="form-row product-row mb-3">
+              <!-- Product Selection -->
+              <div class="form-group col-md-3">
+                <label for="product_id"
+                  >Product<span style="color: red">*</span></label
+                >
+                <select
+                  class="form-control product-select"
+                  name="product_id[]"
+                  required
+                >
+                  <option value="">-- Select Product --</option>
+                  <% products.forEach(product => { %>
+                  <option
+                    value="<%= product.id %>"
+                    data-price="<%= product.price %>"
+                  >
+                    <%= product.name %> (<%= product.sku %>)
+                  </option>
+                  <% }); %>
+                </select>
+                <span class="text-danger product-error"></span>
+              </div>
+
+              <!-- Quantity Input -->
+              <div class="form-group col-md-2">
+                <label for="quantity"
+                  >Quantity<span style="color: red">*</span></label
+                >
+                <input
+                  type="number"
+                  class="form-control quantity-input"
+                  name="quantity[]"
+                  placeholder="Quantity"
+                  min="0.1"
+                  step="0.1"
+                  required
+                />
+                <span class="text-danger quantity-error"></span>
+              </div>
+
+              <!-- Price Field (Auto-Filled) -->
+              <div class="form-group col-md-2">
+                <label for="price">Price</label>
+                <input
+                  type="text"
+                  class="form-control price-input"
+                  name="price[]"
+                />
+              </div>
+
+              <!-- Remove Product Button -->
+              <div class="form-group col-md-2 d-flex align-items-end">
+                <button type="button" class="btn btn-danger remove-product">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add More Product Button -->
+          <button
+            type="button"
+            id="add-product"
+            class="btn btn-outline-primary"
+          >
+            ➕ Add More Product
+          </button>
+        </div>
+      </div>
+
+      <!-- Submit & Cancel Buttons -->
+      <div class="card-footer">
+        <button type="submit" class="btn btn-lg btn-success">
+          Submit Order
+        </button>
+        <a href="/orders" class="btn btn-default btn-lg float-right">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- JavaScript for Adding/Removing Products and Auto-Filling Price -->
+<script>
+  document.getElementById("add-product").addEventListener("click", function () {
+    let container = document.getElementById("products-container");
+
+    let productRow = document.createElement("div");
+    productRow.classList.add("form-row", "product-row", "mb-3");
+
+    productRow.innerHTML = `
+        <div class="form-group col-md-3">
+          <label for="product_id">Product<span style="color: red">*</span></label>
+          <select class="form-control product-select" name="product_id[]" required>
+            <option value="">-- Select Product --</option>
+            <% products.forEach(product => { %>
+              <option value="<%= product.id %>" data-price="<%= product.price %>">
+                <%= product.name %> (<%= product.sku %>)
+              </option>
+            <% }); %>
+          </select>
+          <span class="text-danger product-error"></span>
+        </div>
+  
+        <div class="form-group col-md-2">
+          <label for="quantity">Quantity<span style="color: red">*</span></label>
+          <input type="number" class="form-control quantity-input" name="quantity[]" placeholder="Quantity" min="0.1" step="0.1" required />
+          <span class="text-danger quantity-error"></span>
+        </div>
+  
+        <div class="form-group col-md-2">
+          <label for="price">Price</label>
+          <input type="text" class="form-control price-input" name="price[]" />
+        </div>
+  
+        <div class="form-group col-md-2 d-flex align-items-end">
+          <button type="button" class="btn btn-danger remove-product"><i class="fas fa-trash-alt"></i></button>
+        </div>
+      `;
+
+    container.appendChild(productRow);
+  });
+
+  document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("remove-product")) {
+      e.target.closest(".product-row").remove();
+    }
+  });
+
+  // Auto-fill price based on selected product
+  document.addEventListener("change", function (e) {
+    if (e.target.classList.contains("product-select")) {
+      let selectedOption = e.target.options[e.target.selectedIndex];
+      let priceInput = e.target
+        .closest(".product-row")
+        .querySelector(".price-input");
+      priceInput.value = selectedOption.getAttribute("data-price") || "";
+    }
+  });
+
+  // Set default order date to today
+  document.getElementById("order_date").valueAsDate = new Date();
+</script>

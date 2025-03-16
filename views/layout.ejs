@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Brij Farms | Dashboard</title>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
+    />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css" />
+    <!-- Ionicons -->
+    <link
+      rel="stylesheet"
+      href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
+    />
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link
+      rel="stylesheet"
+      href="/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css"
+    />
+    <!-- iCheck -->
+    <link
+      rel="stylesheet"
+      href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css"
+    />
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="/plugins/jqvmap/jqvmap.min.css" />
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/css/brijfarms.min.css" />
+    <!-- overlayScrollbars -->
+    <link
+      rel="stylesheet"
+      href="/plugins/overlayScrollbars/css/OverlayScrollbars.min.css"
+    />
+    <!-- Daterange picker -->
+    <link
+      rel="stylesheet"
+      href="/plugins/daterangepicker/daterangepicker.css"
+    />
+    <!-- summernote -->
+    <link rel="stylesheet" href="/plugins/summernote/summernote-bs4.min.css" />
+  </head>
+  <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <!-- Preloader -->
+      <div
+        class="preloader flex-column justify-content-center align-items-center"
+      >
+        <img
+          class="animation__shake"
+          src="/dist/img/brij.png"
+          alt="AdminLTELogo"
+          height="60"
+          width="60"
+        />
+      </div>
+      <!-- Navbar -->
+      <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"
+              ><i class="fas fa-bars"></i
+            ></a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="/" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="/users" class="nav-link">Users</a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="/customers" class="nav-link">Customers</a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="/products" class="nav-link">Products</a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="/orders" class="nav-link">Orders</a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="/invoices" class="nav-link">Billing & invoices</a>
+          </li>
+        </ul>
+
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+          <!-- Notifications Dropdown Menu -->
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+              <i class="far fa-bell"></i>
+              <span class="badge badge-warning navbar-badge">15</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+              <span class="dropdown-item dropdown-header"
+                >15 Notifications</span
+              >
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-envelope mr-2"></i> 4 new messages
+                <span class="float-right text-muted text-sm">3 mins</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-users mr-2"></i> 8 friend requests
+                <span class="float-right text-muted text-sm">12 hours</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-file mr-2"></i> 3 new reports
+                <span class="float-right text-muted text-sm">2 days</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item dropdown-footer"
+                >See All Notifications</a
+              >
+            </div>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+              <i class="fas fa-expand-arrows-alt"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              data-widget="control-sidebar"
+              data-slide="true"
+              href="#"
+              role="button"
+            >
+              <i class="fas fa-th-large"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.navbar -->
+
+      <!-- Main Sidebar Container -->
+      <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="/" class="brand-link">
+          <img
+            src="/dist/img/AdminLTELogo.png"
+            alt="AdminLTE Logo"
+            class="brand-image img-circle elevation-3"
+            style="opacity: 0.8"
+          />
+          <span class="brand-text font-weight-light">Brij Farms</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img
+                src="/dist/img/user2-160x160.jpg"
+                class="img-circle elevation-2"
+                alt="User Image"
+              />
+            </div>
+            <div class="info">
+              <a href="#" class="d-block"><%= user ? user.name : 'Guest' %></a>
+            </div>
+          </div>
+
+          <!-- SidebarSearch Form -->
+          <div class="form-inline">
+            <div class="input-group" data-widget="sidebar-search">
+              <input
+                class="form-control form-control-sidebar"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <div class="input-group-append">
+                <button class="btn btn-sidebar">
+                  <i class="fas fa-search fa-fw"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
+            <ul
+              class="nav nav-pills nav-sidebar flex-column"
+              data-widget="treeview"
+              role="menu"
+              data-accordion="false"
+            >
+              <li class="nav-item">
+                <a href="/" class="nav-link">
+                  <i class="nav-icon fas fa-home"></i>
+                  <p>Home</p>
+                </a>
+              </li>
+              <% if (user) { %>
+              <li class="nav-item">
+                <a href="/customers" class="nav-link">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>Customers</p>
+                </a>
+              </li>
+              <% if (user.role === 'superadmin' || user.role === 'admin') { %>
+              <li class="nav-item">
+                <a href="/users" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Users</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/products" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Products</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/orders" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Orders</p></a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="/invoices" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Billing & invoices</p>
+                </a>
+              </li>
+              <% } %>
+              <li class="nav-item">
+                <a href="/auth/logout" class="nav-link">
+                  <i class="nav-icon fas fa-sign-out-alt"></i>
+                  <p>Logout</p>
+                </a>
+              </li>
+              <% } else { %>
+              <li class="nav-item">
+                <a href="/login" class="nav-link">
+                  <i class="nav-icon fas fa-sign-in-alt"></i>
+                  <p>Login</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/register" class="nav-link">
+                  <i class="nav-icon fas fa-user-plus"></i>
+                  <p>Register</p>
+                </a>
+              </li>
+              <% } %>
+            </ul>
+          </nav>
+          <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+      </aside>
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 class="m-0">Dashboard v2</h1>
+              </div>
+              <!-- /.col -->
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active">Dashboard</li>
+                </ol>
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="container-fluid">
+            <!-- Info boxes -->
+            <%- body %>
+            <!-- /.row -->
+          </div>
+          <!--/. container-fluid -->
+        </section>
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+      </aside>
+
+      <!-- Main Footer -->
+      <footer class="main-footer">
+        <div class="float-right d-none d-sm-block"><b>Version</b> 1.0.0</div>
+        <strong>Copyright &copy; 2025 Brij Farms.</strong> All rights reserved.
+      </footer>
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/js/brijfarms.js"></script>
+
+    <!-- DataTables  & Plugins -->
+    <script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="/plugins/jszip/jszip.min.js"></script>
+    <script src="/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <!-- jQuery Mapael -->
+    <script src="/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+    <script src="/plugins/raphael/raphael.min.js"></script>
+    <!-- <script src="/plugins/jquery-mapael/jquery.mapael.min.js"></script> -->
+    <!-- <script src="/plugins/jquery-mapael/maps/usa_states.min.js"></script> -->
+    <!-- ChartJS -->
+    <!-- <script src="/plugins/chart.js/Chart.min.js"></script> -->
+
+    <!-- AdminLTE for demo purposes -->
+    <!-- <script src="/js/demo.js"></script> -->
+
+    <script>
+      $(document).ready(function () {
+        $("#users").DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: {
+            url: "/users/data", // ✅ Fetch from the correct endpoint
+            type: "GET",
+            dataSrc: function (json) {
+              console.log("🔵 Data received from server:", json); // Debugging
+              return json.data;
+            },
+            error: function (xhr, error, thrown) {
+              console.log("❌ AJAX Error:", xhr.responseText); // Log error details
+            },
+          },
+          columns: [
+            { data: "id" },
+            { data: "name" },
+            { data: "email" },
+            { data: "role" },
+            { data: "status" },
+            {
+              data: "created_at",
+              render: function (data, type, row) {
+                return new Date(data).toLocaleDateString(); // Converts to MM/DD/YYYY
+              },
+            },
+            {
+              data: "status",
+              render: function (data, type, row) {
+                let buttonClass =
+                  row.status === "active" ? "btn-success" : "btn-danger";
+                let buttonText =
+                  row.status === "active" ? "Deactivate" : "Activate";
+
+                return `
+                  <button class="btn ${buttonClass} btn-sm toggle-status" data-id="${row.id}" data-status="${row.status}">
+                    ${buttonText}
+                  </button>
+                `;
+              },
+            },
+          ],
+          order: [[0, "asc"]],
+        });
+
+        // Handle Activate/Deactivate button click
+        $("#users").on("click", ".toggle-status", function () {
+          let button = $(this);
+          let userId = button.data("id");
+          let currentStatus = button.data("status");
+          let newStatus = currentStatus === "active" ? "inactive" : "active";
+
+          $.ajax({
+            url: `/users/${userId}/status`,
+            type: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify({ status: newStatus }),
+            success: function (response) {
+              console.log("✅ Status updated:", response);
+              $("#users").DataTable().ajax.reload(); // Reload table data
+            },
+            error: function (xhr, error, thrown) {
+              console.log("❌ Error updating status:", xhr.responseText);
+            },
+          });
+        });
+
+        $("#users").on("click", ".toggle-status", function () {
+          let button = $(this);
+          let userId = button.data("id");
+          let currentStatus = button.data("status");
+          let newStatus = currentStatus === "active" ? "inactive" : "active";
+
+          $.ajax({
+            url: `/users/${userId}/status`,
+            type: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify({ status: newStatus }),
+            success: function (response) {
+              console.log("✅ Status updated:", response);
+
+              // ✅ Update button UI instantly (before table reloads)
+              let isActive = newStatus === "active";
+              button
+                .text(isActive ? "Deactivate" : "Activate")
+                .removeClass(isActive ? "btn-success" : "btn-danger")
+                .addClass(isActive ? "btn-danger" : "btn-success")
+                .data("status", newStatus);
+
+              // ✅ Reload DataTable to reflect changes
+              table.ajax.reload(null, false);
+            },
+            error: function (xhr, error, thrown) {
+              console.log("❌ Error updating status:", xhr.responseText);
+            },
+          });
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+        let table = $("#customers").DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: {
+            url: "/customers/data", // ✅ Fetch customers from the correct API route
+            type: "GET",
+            dataSrc: function (json) {
+              console.log("🔵 Data received from server:", json);
+              return json.data;
+            },
+            error: function (xhr, error, thrown) {
+              console.log("❌ AJAX Error:", xhr.responseText);
+            },
+          },
+          columns: [
+            { data: "id" },
+            { data: "name" },
+            { data: "email" },
+            { data: "phone" },
+            { data: "address" },
+            { data: "location" },
+            { data: "status" },
+            {
+              data: "created_at",
+              render: function (data, type, row) {
+                return new Date(data).toLocaleDateString();
+              },
+            },
+            {
+              data: "status",
+              render: function (data, type, row) {
+                let isActive = row.status === "active";
+                let buttonClass = isActive ? "btn-danger" : "btn-success";
+                let buttonText = isActive ? "Deactivate" : "Activate";
+
+                return `
+                  <button class="btn ${buttonClass} btn-sm toggle-status" data-id="${row.id}" data-status="${row.status}">
+                    ${buttonText}
+                  </button>
+                  <a href="/customers/edit/${row.id}" class="btn btn-warning btn-sm">Edit</a>
+                  <button class="btn btn-danger btn-sm delete-customer" data-id="${row.id}">Delete</button>
+                `;
+              },
+            },
+          ],
+          order: [[0, "asc"]],
+        });
+
+        // ✅ Handle Activate/Deactivate button click
+        $("#customers").on("click", ".toggle-status", function () {
+          let button = $(this);
+          let customerId = button.data("id");
+          let currentStatus = button.data("status");
+          let newStatus = currentStatus === "active" ? "inactive" : "active";
+
+          $.ajax({
+            url: `/customers/${customerId}/status`,
+            type: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify({ status: newStatus }),
+            success: function (response) {
+              console.log("✅ Status updated:", response);
+              table.ajax.reload(null, false);
+            },
+            error: function (xhr, error, thrown) {
+              console.log("❌ Error updating status:", xhr.responseText);
+            },
+          });
+        });
+
+        // ✅ Handle Delete button click
+        $("#customers").on("click", ".delete-customer", function () {
+          let customerId = $(this).data("id");
+
+          if (confirm("Are you sure you want to delete this customer?")) {
+            $.ajax({
+              url: `/customers/${customerId}`,
+              type: "DELETE",
+              success: function (response) {
+                console.log("✅ Customer deleted:", response);
+                table.ajax.reload(null, false);
+              },
+              error: function (xhr, error, thrown) {
+                console.log("❌ Error deleting customer:", xhr.responseText);
+              },
+            });
+          }
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+        let table = $("#products").DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: {
+            url: "/products/data",
+            type: "GET",
+            dataSrc: function (json) {
+              console.log("🔵 Data received from server:", json);
+              return json.data;
+            },
+            error: function (xhr, error, thrown) {
+              console.log("❌ AJAX Error:", xhr.responseText);
+            },
+          },
+          columns: [
+            { data: "id" },
+            { data: "name" },
+            { data: "description" },
+            { data: "uom" },
+            { data: "price" },
+            { data: "quantity" },
+            {
+              data: "image",
+              render: function (data, type, row) {
+                return `<img src="${data}" alt="Product Image" width="50">`;
+              },
+            },
+            { data: "category" },
+            { data: "status" },
+            {
+              data: "created_at",
+              render: function (data, type, row) {
+                return new Date(data).toLocaleDateString();
+              },
+            },
+            {
+              data: "status",
+              render: function (data, type, row) {
+                let isActive = row.status === "active";
+                let buttonClass = isActive ? "btn-danger" : "btn-success";
+                let buttonText = isActive ? "Deactivate" : "Activate";
+
+                return `
+                  <button class="btn ${buttonClass} btn-sm toggle-status" data-id="${row.id}" data-status="${row.status}">
+                    ${buttonText}
+                  </button>
+                  <a href="/products/edit/${row.id}" class="btn btn-warning btn-sm">Edit</a>
+                  <button class="btn btn-danger btn-sm delete-product" data-id="${row.id}">Delete</button>
+                `;
+              },
+            },
+          ],
+          order: [[0, "asc"]],
+        });
+
+        // ✅ Handle Activate/Deactivate button click
+        $("#products").on("click", ".toggle-status", function () {
+          let button = $(this);
+          let productId = button.data("id");
+          let currentStatus = button.data("status");
+          let newStatus = currentStatus === "active" ? "inactive" : "active";
+          console.log("productId", productId);
+          $.ajax({
+            url: `/products/${productId}/status`,
+            type: "PUT",
+            dataType: "json", // Ensure the response is parsed correctly
+            contentType: "application/json",
+            data: JSON.stringify({ status: newStatus }),
+            success: function (response) {
+              console.log("✅ Status updated successfully:", response);
+
+              // Make sure 'table' is defined before calling reload
+              if (typeof table !== "undefined" && table !== null) {
+                table.ajax.reload(null, false); // Reload DataTable without refreshing page
+                button.data("status", newStatus); // Update button data attribute
+                button.text(newStatus === "active" ? "Deactivate" : "Activate");
+              } else {
+                console.warn("⚠️ DataTable instance not found.");
+              }
+            },
+            error: function (xhr, status, error) {
+              console.error(
+                "❌ Error updating status:",
+                xhr.status,
+                xhr.responseText
+              );
+            },
+          });
+        });
+
+        // ✅ Handle Delete button click
+        $("#products").on("click", ".delete-product", function () {
+          let productId = $(this).data("id");
+          console.log("del", productId);
+          if (confirm("Are you sure you want to delete this product?")) {
+            $.ajax({
+              url: `/products/${productId}`,
+              type: "DELETE",
+              success: function (response) {
+                console.log("✅ Product deleted:", response);
+                table.ajax.reload(null, false);
+              },
+              error: function (xhr, error, thrown) {
+                console.log("❌ Error deleting product:", xhr.responseText);
+              },
+            });
+          }
+        });
+      });
+    </script>
+
+    <script>
+      $(document).ready(function () {
+        let table = $("#orders").DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: {
+            url: "/orders/data",
+            type: "GET",
+            dataSrc: function (json) {
+              return json.data;
+            },
+            error: function (xhr, error, thrown) {
+              console.log("❌ AJAX Error:", xhr.responseText);
+            },
+          },
+          columns: [
+            { data: "id" }, // Order ID with prefix 'BF-0001'
+            { data: "order_number" },
+            { data: "customer_name" }, // Customer Name
+            { data: "products" }, // Products (name + quantity)
+            {
+              data: "subtotal",
+              render: function (data) {
+                let subtotal = parseFloat(data);
+                return isNaN(subtotal) ? "₹0.00" : `₹${subtotal.toFixed(2)}`;
+              },
+            },
+            {
+              data: "order_date",
+              render: function (data) {
+                return new Date(data).toLocaleDateString();
+              },
+            }, // Order Date
+            { data: "status" }, // Order Status
+            { data: "actions", orderable: false }, // Edit/Delete Actions
+          ],
+          order: [[0, "asc"]],
+        });
+
+        $("#orders").on("click", ".delete-order", function () {
+          let orderId = $(this).data("id");
+
+          if (confirm("Are you sure you want to delete this order?")) {
+            $.ajax({
+              url: `/orders/${orderId}`,
+              type: "DELETE",
+              success: function (response) {
+                console.log("✅ Order deleted:", response);
+                table.ajax.reload(null, false);
+              },
+              error: function (xhr, error, thrown) {
+                console.log("❌ Error deleting Order:", xhr.responseText);
+              },
+            });
+          }
+        });
+
+        // ✅ Handle Activate/Deactivate button click
+        $("#orders").on("click", ".toggle-status", function () {
+          let button = $(this);
+          let orderId = button.data("id");
+          let currentStatus = button.data("status");
+          let newStatus = currentStatus === "active" ? "inactive" : "active";
+
+          $.ajax({
+            url: `/orders/${orderId}/status`,
+            type: "PUT",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify({ status: newStatus }),
+            success: function (response) {
+              console.log("✅ Status updated successfully:", response);
+              table.ajax.reload(null, false);
+              button.data("status", newStatus);
+              button.text(newStatus === "active" ? "Deactivate" : "Activate");
+            },
+            error: function (xhr, status, error) {
+              console.error(
+                "❌ Error updating status:",
+                xhr.status,
+                xhr.responseText
+              );
+            },
+          });
+        });
+
+        $("#generateInvoice").click(function () {
+          if (
+            confirm(
+              "Are you sure you want to generate invoices for this month?"
+            )
+          ) {
+            $.ajax({
+              url: "/invoices/generate-all",
+              type: "POST",
+              success: function (response) {
+                alert("Invoices generated successfully!");
+                window.location.href = "/invoices";
+              },
+              error: function () {
+                alert("Error generating invoices");
+              },
+            });
+          }
+        });
+
+        // ✅ Handle Delete button click
+      });
+    </script>
+
+    <script>
+      $(document).ready(function () {
+        // Initialize DataTable and store reference
+        let table = $("#invoiceTable").DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: {
+            url: "/invoices/data",
+            type: "GET",
+          },
+          columns: [
+            { data: "invoice_number" },
+            { data: "customer_name" },
+            { data: "order_number" },
+            { data: "invoice_month" },
+            { data: "total_amount" },
+            { data: "status" },
+            { data: "created_at" },
+            { data: "updated_at" },
+            {
+              data: "actions",
+              title: "Actions",
+              orderable: false,
+              searchable: false,
+            },
+          ],
+        });
+
+        // Delete invoice event
+        $("#invoiceTable").on("click", ".delete-invoice", function () {
+          let invoiceId = $(this).data("id");
+          if (confirm("Are you sure you want to delete this invoice?")) {
+            $.ajax({
+              url: `/invoices/delete/${invoiceId}`,
+              type: "DELETE",
+              success: function (response) {
+                if (response.success) {
+                  alert("Invoice deleted successfully!");
+                  table.ajax.reload(null, false); // ✅ Refresh DataTable without resetting pagination
+                } else {
+                  alert("Error: " + response.message);
+                }
+              },
+              error: function (xhr, status, error) {
+                console.error("❌ Delete Error:", xhr.responseText);
+                alert("Error deleting invoice.");
+              },
+            });
+          }
+        });
+      });
+    </script>
+
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <!-- <script src="/js/pages/dashboard2.js"></script> -->
+  </body>
+</html>

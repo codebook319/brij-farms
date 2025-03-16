@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+      .input-group-addon {
+        color: #fff;
+        background-color: #337ab7;
+      }
+
+      .form-control,
+      .input-group-addon {
+        border-radius: 0px;
+      }
+
+      label {
+        text-align: left !important;
+      }
+
+      .panel-primary {
+        border-color: #337ab7;
+      }
+
+      .panel-primary .panel-heading {
+        background-color: #337ab7;
+        border-color: #337ab7;
+      }
+
+      .panel-primary .panel-title {
+        color: #fff;
+      }
+
+      .panel-primary .panel-body {
+        background-color: #f9f9f9;
+      }
+
+      .btn-primary {
+        background-color: #337ab7;
+        border-color: #2e6da4;
+      }
+
+      .btn-primary:hover {
+        background-color: #286090;
+        border-color: #204d74;
+      }
+
+      .alert-danger {
+        color: #a94442;
+        background-color: #f2dede;
+        border-color: #ebccd1;
+      }
+
+      .alert-success {
+        color: #3c763d;
+        background-color: #dff0d8;
+        border-color: #d6e9c6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="container">
+        <div
+          id="registerbox"
+          style="margin-top: 50px"
+          class="mainbox col-md-5 col-md-offset-4 col-sm-7 col-sm-offset-3"
+        >
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <div class="panel-title text-center">
+                <i class="fa fa-user-plus"></i> Sign Up
+              </div>
+              <div
+                style="
+                  float: right;
+                  font-size: 85%;
+                  position: relative;
+                  top: -10px;
+                "
+              >
+                <a href="/auth/login">Sign In</a>
+              </div>
+            </div>
+
+            <div style="padding-top: 30px" class="panel-body">
+              <!-- Flash messages for errors and success -->
+              <% if (messages.error && messages.error.length > 0) { %>
+              <div class="alert alert-danger"><%= messages.error %></div>
+              <% } %> <% if (messages.success && messages.success.length > 0) {
+              %>
+              <div class="alert alert-success"><%= messages.success %></div>
+              <% } %>
+
+              <form
+                id="registerform"
+                class="form-horizontal"
+                role="form"
+                action="/auth/register"
+                method="POST"
+              >
+                <div class="form-group">
+                  <label for="email" class="col-md-4 control-label"
+                    >Email</label
+                  >
+                  <div class="col-md-8">
+                    <input
+                      type="email"
+                      class="form-control input-sm"
+                      name="email"
+                      placeholder="Email Address"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="name" class="col-md-4 control-label">Name</label>
+                  <div class="col-md-8">
+                    <input
+                      type="text"
+                      class="form-control input-sm"
+                      name="name"
+                      placeholder="Full Name"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="role" class="col-md-4 control-label">Role</label>
+                  <div class="col-md-8">
+                    <select class="form-control input-sm" name="role" required>
+                      <option value="user">User</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="password" class="col-md-4 control-label"
+                    >Password</label
+                  >
+                  <div class="col-md-8">
+                    <input
+                      type="password"
+                      class="form-control input-sm"
+                      name="password"
+                      placeholder="Password"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="confirmPassword" class="col-md-4 control-label"
+                    >Confirm Password</label
+                  >
+                  <div class="col-md-8">
+                    <input
+                      type="password"
+                      class="form-control input-sm"
+                      name="confirmPassword"
+                      placeholder="Confirm Password"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-md-offset-4 col-md-8">
+                    <button
+                      id="btn-register"
+                      type="submit"
+                      class="btn btn-primary btn-sm"
+                    >
+                      Sign Up <i class="fa fa-user-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <div class="form-group">
+                <div class="col-md-12 control">
+                  <div
+                    style="
+                      border-top: 1px solid#888;
+                      padding-top: 15px;
+                      font-size: 85%;
+                    "
+                  >
+                    Already have an account?
+                    <a href="/auth/login">Login Here</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
